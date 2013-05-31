@@ -13,6 +13,7 @@ module Rename
 
         new_module_name(mod_name)
         new_directory_name(new_name)
+        replace_gemset_name_in_rvmrc(new_name)
       end
 
       private
@@ -61,6 +62,10 @@ module Rename
         rescue Exception => ex
           puts "Error:#{ex.message}"
         end
+      end
+      
+      def replace_gemset_name_in_rvmrc(new_name)
+        gsub_file '.rvmrc', /@(.*)\s/, new_name
       end
     end
   end
